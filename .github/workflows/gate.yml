@@ -1,0 +1,14 @@
+name: gate
+on:
+  pull_request:
+  merge_group:
+permissions: { contents: read }
+jobs:
+  ansera-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v5
+        with: { node-version: '22.12' }
+      - run: node scripts/gate-check.mjs
